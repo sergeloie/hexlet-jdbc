@@ -8,6 +8,13 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     application
+    idea
+    jacoco
+    checkstyle
+    id("io.freefair.lombok") version "8.4"
+    id("se.patrikerdes.use-latest-versions") version "0.2.18"
+    id("com.github.ben-manes.versions") version "0.50.0"
+    id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 
 repositories {
@@ -16,14 +23,15 @@ repositories {
 }
 
 dependencies {
+    implementation("org.projectlombok:lombok:1.18.30")
     // Use JUnit Jupiter for testing.
-    testImplementation("org.junit.jupiter:junit-jupiter:5.9.3")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.10.1")
 
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
     // This dependency is used by the application.
-    implementation("com.google.guava:guava:32.1.1-jre")
-    implementation("com.h2database:h2:2.2.220")
+    implementation("com.google.guava:guava:32.1.3-jre")
+    implementation("com.h2database:h2:2.2.224")
 }
 
 // Apply a specific Java toolchain to ease working on different environments.

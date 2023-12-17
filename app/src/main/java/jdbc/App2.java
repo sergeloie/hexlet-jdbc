@@ -5,14 +5,14 @@ package jdbc;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import jdbc.UserDAO;
 
-public class App {
+
+public class App2 {
 
 
     public static void main(String[] args) throws SQLException {
 
-        try (var conn = DriverManager.getConnection("jdbc:h2:mem:heclet_test")) {
+        try (var conn = DriverManager.getConnection("jdbc:h2:mem:hexlet_test")) {
 
 
             var sql = "CREATE TABLE users (id BIGINT PRIMARY KEY AUTO_INCREMENT, username VARCHAR(255), phone VARCHAR(255))";
@@ -20,10 +20,17 @@ public class App {
                 statement.execute(sql);
             }
 
-            var sql2 = "INSERT INTO users (username, phone) VALUES ('tommy', '1234567890')";
-            try (var statement2 = conn.createStatement()) {
-                statement2.executeUpdate(sql2);
-            }
+            User user1 = new User("Serge", "9518000939");
+            User user2 = new User("Taty", "9048191086");
+            User user3 = new User("Johnny", "3519001086");
+
+            UserDAO dao = new UserDAO(conn);
+
+            dao.save(user1);
+            dao.save(user2);
+            dao.save(user3);
+
+            System.out.println(dao.find(1L).orElse(null));
 
             var sql3 = "SELECT * FROM users";
             try (var statement3 = conn.createStatement()) {
